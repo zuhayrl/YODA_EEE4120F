@@ -16,6 +16,9 @@ int main()
     string line1 = "P3";
     string line2 = "#Image 1";
     string line3 = "64 64";
+    //int len = 64;
+    //string slen = to_string(len);
+    //string line3 = slen + " " + slen;
     string line4 = "255";
     string rgb_val = line1 +"\n"+ line2 +"\n" + line3 + "\n" + line4 + "\n";
     for (int i=0; i<64; i++)
