@@ -17,6 +17,8 @@ This project focuses on image stenography and it's usage for encoding data. We w
 
 **Github 1:** https://github.com/hitanshu-dhawan/ImageSteganography
 
+**Github 2:** https://github.com/MasonEdgar/DCT-Image-Steganography
+
 **Medium 1:** https://medium.com/@renantkn/lsb-steganography-hiding-a-message-in-the-pixels-of-an-image-4722a8567046
 
 **Medium 2:** https://medium.com/swlh/lsb-image-steganography-using-python-2bbbee2c69a2 
