@@ -1,109 +1,36 @@
 
-//Author: Christopher Hill For the EEE4120F course at UCT
-//Edited by Zuhayr Loonat
+//Author: Zuhayr Loonat
 
-#include<stdio.h>
-#include<CL/cl.h>
-#include<iostream>
-#include<fstream>
-#include<string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <CL/cl.h>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <fstream>
+
 #include<cmath>
 #include <tuple>
 
 using namespace std;
-
-
-//creates a square matrix of dimensions Size X Size, with the values being the column number
-void createKnownSquareMatrix(int Size, int* squareMatrix, bool displayMatrices){
-
-
-	for(int i = 0; i<Size; i++){
-
-		for(int j = 0; j<Size; j++){
-			squareMatrix[i*Size+j] = j + 1;
-			if(displayMatrices){
-				cout<<squareMatrix[i*Size+j]<<"\t ";
-			}
-		}
-		if(displayMatrices){
-			cout<<"\n";
-		}
-	}
-
-
-}
-
-
-//creates a random square matrix of dimensions Size X Size, with values ranging from 1-100
-void createRandomSquareMatrix(int Size, int* squareMatrix, bool displayMatrices){
-
-
-	for(int i = 0; i<Size; i++){
-
-		for(int j = 0; j<Size; j++){
-			squareMatrix[i*Size+j] = rand() % 100 + 1;
-			if(displayMatrices){
-				cout<<squareMatrix[i*Size+j]<<"\t ";
-			}
-		}
-		if(displayMatrices){
-			cout<<"\n";
-		}
-	}
-
-
-}
-
 
 int main(void)
 {
 
 	clock_t start, end;  //Timers
 
-	//New code for prac 2.2
-	bool displayMatrices = true;
-	int Size = 3;
-	int countA = Size*Size;
-	int matrixA[countA];
-	createKnownSquareMatrix(Size,matrixA, false);
-	if(displayMatrices){
-		for(int i = 0; i<Size; i++){
-			for(int j = 0; j<Size; j++){
-					cout<<matrixA[i*Size+j]<<"\t ";
+	//Initialisation Code
+	std::string imageData;
+	int length = 64;
 
-			}
+	//might have to make header here
+	std::string line1 = "P3";
+    std::string line2 = "#Image Test";
+    std::string line3 = std::to_string(length) + " " + std::to_string(length);
+    std::string line4 = "255";
 
-			cout<<"\n";
+    imageData = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4;
 
-		}
-	}
-	cout<<"Number of elements in matrix 1: "<<countA<<"\n";
-	cout<<"Dimensions of matrix 1: "<<Size<<"x"<<Size<<"\n";
-	cout<<"Matrix 1 pointer: "<<matrixA<<"\n";
-
-
-
-
-	int countB = Size*Size;
-	int matrixB[countB];
-	createKnownSquareMatrix(Size, matrixB, false);
-	for(int g = 0; g<countB; g++){
-		matrixB[g] = 2*matrixB[g];
-	}
-	if(displayMatrices){
-		for(int i = 0; i<Size; i++){
-			for(int j = 0; j<Size; j++){
-					cout<<matrixB[i*Size+j]<<"\t ";
-
-			}
-
-			cout<<"\n";
-
-		}
-	}
-	cout<<"Number of elements in matrix 2: "<<countB<<"\n";
-	cout<<"Dimensions of matrix 2: "<<Size<<"x"<<Size<<"\n";
-	cout<<"Matrix 2 pointer: "<<matrixB<<"\n";
 
 
 	/* OpenCL structures you need to program*/
@@ -117,8 +44,8 @@ int main(void)
 
 
 	//Initialize Buffers, memory space the allows for communication between the host and the target device
-	//TODO: initialize matrixA_buffer, matrixB_buffer and output_buffer
-    cl_mem matrixA_buffer, matrixB_buffer, output_buffer;
+	//TODO: initialize matrixA_buffer, matrixB_buffer and imageData_buffer
+    cl_mem imageData_buffer;
 
 
 	//***step 1*** Get the platform you want to use
@@ -137,7 +64,7 @@ int main(void)
 	platforms = (cl_platform_id*) malloc(sizeof(cl_platform_id) * platformCount);
 	clGetPlatformIDs(platformCount, platforms, NULL); //saves a list of platforms in the platforms variable
 
-
+	//TODO: CHNAGE PLATFORM
 	cl_platform_id platform = platforms[2]; //Select the platform you would like to use in this program (change index to do this). If you would like to see all available platforms run platform.cpp.
 
 
@@ -235,7 +162,7 @@ int main(void)
 	//			cl_int* errcode_ret);
 
 	//TODO: select the kernel you are running
-    cl_kernel kernel = clCreateKernel(program, "matrixMultiplication", &err);
+    cl_kernel kernel = clCreateKernel(program, "LSB_Encoding", &err);
 
 	//------------------------------------------------------------------------
 
@@ -251,15 +178,15 @@ int main(void)
 
 	//***Step 9*** create data buffers for memory management between the host and the target device
 	//TODO: set global_size, local_size and num_groups, in order to control the number of work item in each work group
-    size_t global_size = Size*Size; //total number of work items (since its a square matrix its eg 4x4)
-    size_t local_size = Size; //Size of each work group
+    size_t global_size = length*length; //total number of work items (since its a square matrix its eg 4x4)
+    size_t local_size = length; //Size of each work group
     cl_int num_groups = global_size/local_size; //number of work groups needed
 
 	//already got matrixA and matrixB
 
 	//TODO: initialize the output array
 	//int output[3*3];
-	int output[Size*Size]; //square matrix
+	//int output[Size*Size]; //square matrix
 
 	//int count_output = Size*Size;
     //int* output = (int*)malloc(sizeof(int) * countA); //output array
@@ -274,11 +201,9 @@ int main(void)
 	//			cl_int* errcode_ret);
 
 
-	//TODO: create matrixA_buffer, matrixB_buffer and output_buffer, with clCreateBuffer()
-    matrixA_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int)*Size*Size, matrixA, &err); //check later!!!!
-	matrixB_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int)*Size*Size, matrixB, &err);
-	output_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*Size*Size, output, &err);
-
+	//TODO: create imageData_buffer, with clCreateBuffer()
+	imageData_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, 4*3*length*length, imageData, &err);
+																						//TODO:approx 4 bytes per line three lines per pixel
 	//------------------------------------------------------------------------
 
 	//***Step 10*** create the arguments for the kernel (link these to the buffers set above, using the pointers for the respective buffers)
@@ -289,10 +214,8 @@ int main(void)
 
 
 	//TODO: create the arguments for the kernel. Note you can create a local buffer only on the GPU as follows: clSetKernelArg(kernel, argNum, size, NULL);
-    clSetKernelArg(kernel, 0, sizeof(cl_mem), &matrixA_buffer);
-    clSetKernelArg(kernel, 1, sizeof(cl_mem), &matrixB_buffer);
-    clSetKernelArg(kernel, 2, sizeof(cl_mem), &output_buffer);
-    clSetKernelArg(kernel, 3, sizeof(int), (void*)&Size); //check later !!!
+    clSetKernelArg(kernel, 0, sizeof(cl_mem), &imageData_buffer);
+    clSetKernelArg(kernel, 1, sizeof(int), (void*)&length); //check later !!!
 
 
 	//------------------------------------------------------------------------
@@ -320,7 +243,7 @@ int main(void)
 	//------------------------------------------------------------------------
 
 	//***Step 12*** Allows the host to read from the buffer object
-	err = clEnqueueReadBuffer(queue, output_buffer, CL_TRUE, 0, sizeof(output), output, 0, NULL, NULL);
+	err = clEnqueueReadBuffer(queue, imageData_buffer, CL_TRUE, 0, sizeof(imageData), imageData, 0, NULL, NULL);
 
 
 	//This command stops the program here until everything in the queue has been run
@@ -328,16 +251,10 @@ int main(void)
 
 
 	//***Step 13*** Check that the host was able to retrieve the output data from the output buffer
-
-	if(displayMatrices){
-		printf("\nOutput in the output_buffer \n");
-		for(int j=0; j<countA; j++) {
-			printf("%i \t " ,output[j]);
-			if(j%Size == (Size-1)){
-				printf("\n");
-			}
-		}
-	}
+    //Print Output to file
+	std::ofstream fileOut("image.ppm", std::ios_base::trunc);
+    fileOut << imageData;
+	printf("It didnt blow up");
 
 	//printf ("Run Time: %0.8f sec \n",((float) end - start)/CLOCKS_PER_SEC);
 
@@ -345,9 +262,7 @@ int main(void)
 
 	//***Step 14*** Deallocate resources
 	clReleaseKernel(kernel);
-	clReleaseMemObject(output_buffer);
-	clReleaseMemObject(matrixA_buffer);
-	clReleaseMemObject(matrixB_buffer);
+	clReleaseMemObject(imageData_buffer);
 	clReleaseCommandQueue(queue);
 	clReleaseProgram(program);
 	clReleaseContext(context);
