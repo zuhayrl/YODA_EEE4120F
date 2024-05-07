@@ -11,26 +11,37 @@
 #include <fstream>
 using namespace std;
 
-int main()
+void createImage(int length, string imageData)
 {
-    int length = 64;
+    //Create Header
     string line1 = "P3";
-    string line2 = "#Image 1";
+    string line2 = "#Image Test";
     string line3 = to_string(length) + " " + to_string(length);
     string line4 = "255";
-    string rgb_val = line1 +"\n"+ line2 +"\n" + line3 + "\n" + line4;
-    for (int i=0; i<64; i++)
+
+    imageData = line1 +"\n"+ line2 +"\n" + line3 + "\n" + line4;
+    //Create Pixels
+    for (int i=0; i<length; i++)
     {
-        for (int j=0; j<64; j++)
+        for (int j=0; j<length; j++)
         {
             int random_r = rand()%256;
             int random_g = rand()%256;
             int random_b = rand()%256;
-            rgb_val = "\n" + rgb_val + to_string(random_r) +"\n" + to_string(random_g) +"\n"+ to_string(random_b);
+            imageData = imageData + "\n" + to_string(random_r) +"\n" + to_string(random_g) +"\n"+ to_string(random_b);
         }
     }
-    std::ofstream fileOut;
-    fileOut.open("image.ppm", std::ios_base::app);
-    fileOut<<rgb_val;
+
+}
+
+int main()
+{
+    string imageData = "";
+    int length = 64;
+    createImage(length, imageData);
+
+    std::ofstream fileOut("image.ppm", std::ios_base::trunc);
+    fileOut << imageData;
+
     return 0;
 }
