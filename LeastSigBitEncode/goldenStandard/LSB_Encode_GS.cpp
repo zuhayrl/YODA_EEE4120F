@@ -22,19 +22,39 @@ void createHeader(int length, std::string& header)
     header = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4;
 }
 
-void createImageData(int length, char* imageData) 
+void createImageData(int length, char (*imageData)[20])
 {
-    
+    int inc = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            int random_r = rand() % 256;
+            int random_g = rand() % 256;
+            int random_b = rand() % 256;
+            char pixel[20];
+            sprintf(pixel, "%d\n%d\n%d\n", random_r, random_g, random_b);
+
+            strcpy(imageData[inc], pixel);
+            inc += 1;
+        }
+    }
 }
 
 
-int main() 
+int main()
 {
     int length = 64;
-    
+    char imageData[length*length][20];
+
+    createImageData(length, imageData);
 
     std::ofstream fileOut("image.ppm", std::ios_base::trunc);
-    fileOut << imageData;
+    for (int i = 0; i < length*length; i++)
+    {
+        fileOut << imageData[i];
+    }
     fileOut.close();
 
     return 0;
