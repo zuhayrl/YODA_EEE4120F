@@ -1,4 +1,4 @@
-//Create encoded image
+//Image encoding LSB
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,17 +7,23 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstring>
+
 using namespace std;
 
-void createImage(int length, std::string& line) 
+void createImage(int length, char* line) 
 {
     // Create Header
-    std::string line1 = "P3";
-    std::string line2 = "#Image Test";
-    std::string line3 = std::to_string(length) + " " + std::to_string(length);
-    std::string line4 = "255";
+    char line1[] = "P3\n";
+    char line2[] = "#Image GS\n";
+    char line3[20];
+    sprintf(line3, "%d %d\n", length, length);
+    char line4[] = "255\n";
 
-    line = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4;
+    strcpy(line, line1);
+    strcat(line, line2);
+    strcat(line, line3);
+    strcat(line, line4);
 
     // Create Pixels
     for (int i = 0; i < length; i++) {
@@ -25,20 +31,22 @@ void createImage(int length, std::string& line)
             int random_r = rand() % 256;
             int random_g = rand() % 256;
             int random_b = rand() % 256;
-            line += "\n" + std::to_string(random_r) + "\n" + std::to_string(random_g) + "\n" + std::to_string(random_b);
+            char pixel[20];
+            sprintf(pixel, "%d\n%d\n%d\n", random_r, random_g, random_b);
+            strcat(line, pixel);
         }
     }
 }
 
 int main() 
 {
-    std::string imageData;
+    char imageData[100000]; // Adjust the size according to your requirement
     int length = 64;
     createImage(length, imageData);
-    //std::cout << imageData << std::endl;
 
     std::ofstream fileOut("image.ppm", std::ios_base::trunc);
     fileOut << imageData;
+    fileOut.close();
 
     return 0;
 }
