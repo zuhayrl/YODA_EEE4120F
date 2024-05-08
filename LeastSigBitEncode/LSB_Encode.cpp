@@ -14,26 +14,30 @@
 
 using namespace std;
 
+void createHeader(int length, std::string& header)
+{
+    // Create Header
+    std::string line1 = "P3";
+    std::string line2 = "#Image GS";
+    std::string line3 = std::to_string(length) + " " + std::to_string(length);
+    std::string line4 = "255";
+
+    header = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n";
+}
+
 int main(void)
 {
 
 	clock_t start, end;  //Timers
 
 	//Initialisation Code
-	int length = 4;
-	char imageData[(length*length*4*3)+22];
+	int length = 64;
+    char imageData[length*length][20];
+	std::string header;
 
 	//create header
-	char line1[] = "P3\n";
-    char line2[] = "#Image OpenCL\n";
-    char line3[20];
-    sprintf(line3, "%d %d\n", length, length);
-    char line4[] = "255\n";
-
-    strcpy(imageData, line1);
-    strcat(imageData, line2);
-    strcat(imageData, line3);
-    strcat(imageData, line4);
+	std::ofstream fileOut("image.ppm", std::ios_base::trunc);
+    fileOut << header;
 
 	/* OpenCL structures you need to program*/
 	//cl_device_id device; step 1 and 2
@@ -164,7 +168,7 @@ int main(void)
 	//			cl_int* errcode_ret);
 
 	//TODO: select the kernel you are running
-    cl_kernel kernel = clCreateKernel(program, "LSB_Encoding", &err);
+    cl_kernel kernel = clCreateKernel(program, "createImageData", &err);
 
 	//------------------------------------------------------------------------
 
@@ -204,7 +208,7 @@ int main(void)
 
 
 	//TODO: create imageData_buffer, with clCreateBuffer()
-	imageData_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, (length*length*4*3)+22, imageData, &err);
+	imageData_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, (length*length*20), imageData, &err);
 																						//TODO:approx 4 bytes per line three lines per pixel
 	//------------------------------------------------------------------------
 
@@ -254,8 +258,11 @@ int main(void)
 
 	//***Step 13*** Check that the host was able to retrieve the output data from the output buffer
     //Print Output to file
-	std::ofstream fileOut("image.ppm", std::ios_base::trunc);
-    fileOut << imageData;
+	for (int i = 0; i < length*length; i++)
+    {
+        fileOut << imageData[i];
+    }
+    fileOut.close();
 	printf("It didnt blow up");
 
 	//printf ("Run Time: %0.8f sec \n",((float) end - start)/CLOCKS_PER_SEC);

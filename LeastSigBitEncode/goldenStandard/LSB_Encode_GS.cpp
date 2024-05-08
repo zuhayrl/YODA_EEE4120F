@@ -24,8 +24,6 @@ void createHeader(int length, std::string& header)
 
 void createImageData(int length, char (*imageData)[20])
 {
-    //int inc = 0;
-
     for (int i = 0; i < length; i++)
     {
         for (int j = 0; j < length; j++)
@@ -37,8 +35,6 @@ void createImageData(int length, char (*imageData)[20])
             sprintf(pixel, "%d\n%d\n%d\n", random_r, random_g, random_b);
 
             strcpy(imageData[i*length+j], pixel);
-            //strcpy(imageData[inc], pixel);
-            //inc += 1;
         }
     }
 }
