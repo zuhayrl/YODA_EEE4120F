@@ -20,12 +20,12 @@ int main(void)
 	clock_t start, end;  //Timers
 
 	//Initialisation Code
-	int length = 64;
+	int length = 4;
 	char imageData[(length*length*4*3)+22];
 
 	//create header
 	char line1[] = "P3\n";
-    char line2[] = "#Image GS\n";
+    char line2[] = "#Image OpenCL\n";
     char line3[20];
     sprintf(line3, "%d %d\n", length, length);
     char line4[] = "255\n";
