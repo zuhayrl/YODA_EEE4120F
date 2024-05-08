@@ -20,7 +20,7 @@ int main(void)
 	clock_t start, end;  //Timers
 
 	//Initialisation Code
-	std::string imageData;
+	std::string imageData; //init output string
 	int length = 64;
 
 	//might have to make header here
