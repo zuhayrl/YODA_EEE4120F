@@ -40,8 +40,8 @@ void createImage(int length, char* line)
 
 int main() 
 {
-    char imageData[100000]; // Adjust the size according to your requirement
     int length = 64;
+    char imageData[(length*length*4*3)+22]; //lemgth x length pixels, max 4 char per line, 3 lines per pixel, plus header
     createImage(length, imageData);
 
     std::ofstream fileOut("image.ppm", std::ios_base::trunc);

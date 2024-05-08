@@ -20,18 +20,20 @@ int main(void)
 	clock_t start, end;  //Timers
 
 	//Initialisation Code
-	std::string imageData; //init output string
 	int length = 64;
+	char imageData[(length*length*4*3)+22];
 
-	//might have to make header here
-	std::string line1 = "P3";
-    std::string line2 = "#Image Test";
-    std::string line3 = std::to_string(length) + " " + std::to_string(length);
-    std::string line4 = "255";
+	//create header
+	char line1[] = "P3\n";
+    char line2[] = "#Image GS\n";
+    char line3[20];
+    sprintf(line3, "%d %d\n", length, length);
+    char line4[] = "255\n";
 
-    imageData = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4;
-
-
+    strcpy(imageData, line1);
+    strcat(imageData, line2);
+    strcat(imageData, line3);
+    strcat(imageData, line4);
 
 	/* OpenCL structures you need to program*/
 	//cl_device_id device; step 1 and 2
@@ -184,7 +186,7 @@ int main(void)
 
 	//already got matrixA and matrixB
 
-	//TODO: initialize the output array
+	//TODO: initialize the output array did this at the top
 	//int output[3*3];
 	//int output[Size*Size]; //square matrix
 
@@ -202,7 +204,7 @@ int main(void)
 
 
 	//TODO: create imageData_buffer, with clCreateBuffer()
-	imageData_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, 4*3*length*length, imageData, &err);
+	imageData_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, (length*length*4*3)+22, imageData, &err);
 																						//TODO:approx 4 bytes per line three lines per pixel
 	//------------------------------------------------------------------------
 
