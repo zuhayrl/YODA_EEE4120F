@@ -23,7 +23,8 @@ void convertToBinary(const string& input, int* binary, int& size) {
     }
 }
 
-int main() {
+int main()
+{
     string username;
     cout << "Enter your username (minimum 4 characters): ";
     getline(cin, username);
@@ -43,42 +44,69 @@ int main() {
     // OpenCL initialization
     cl_uint platformCount;
     cl_platform_id *platforms;
+    // get platforms count 
     clGetPlatformIDs(5, NULL, &platformCount);
+
+    // get all platforms
     platforms = (cl_platform_id*)malloc(sizeof(cl_platform_id) * platformCount);
     clGetPlatformIDs(platformCount, platforms, NULL);
-    cl_platform_id platform = platforms[2];
+    
+    //TODO: Choose platform
+    cl_platform_id platform = platforms[1];
 
-    char* Info = (char*)malloc(0x1000 * sizeof(char));
-    clGetPlatformInfo(platform, CL_PLATFORM_NAME, 0x1000, Info, 0);
+    //Outputs the information of the chosen platform
+	char* Info = (char*)malloc(0x1000*sizeof(char));
+	clGetPlatformInfo(platform, CL_PLATFORM_NAME      , 0x1000, Info, 0);
+	//printf("Name      : %s\n", Info);
+	clGetPlatformInfo(platform, CL_PLATFORM_VENDOR    , 0x1000, Info, 0);
+	//printf("Vendor    : %s\n", Info);
+	clGetPlatformInfo(platform, CL_PLATFORM_VERSION   , 0x1000, Info, 0);
+	//printf("Version   : %s\n", Info);
+	clGetPlatformInfo(platform, CL_PLATFORM_PROFILE   , 0x1000, Info, 0);
+	//printf("Profile   : %s\n", Info);
 
-    cl_device_id device;
+    cl_device_id device; //this is your drviceID
     cl_int err;
+
+    /* Access a device */
+	//The if statement checks to see if the chosen platform uses a GPU, if not it setups the device using the CPU
     err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, &device, NULL);
     if (err == CL_DEVICE_NOT_FOUND) {
         err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_CPU, 1, &device, NULL);
     }
 
+
+    //***Step 3*** creates a context that allows devices to send and receive kernels and transfer data
     cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, NULL);
 
+
+    //***Step 4*** get details about the kernel.cl file in order to create it (read the kernel.cl file and place it in a buffer)
+	//read file in
     FILE *program_handle;
     program_handle = fopen("Kernel.cl", "r");
+
     size_t program_size;
     fseek(program_handle, 0, SEEK_END);
     program_size = ftell(program_handle);
     rewind(program_handle);
+
+    //sort buffer out
     char *program_buffer = (char*)malloc(program_size + 1);
     program_buffer[program_size] = '\0';
     fread(program_buffer, sizeof(char), program_size, program_handle);
     fclose(program_handle);
 
     cl_program program = clCreateProgramWithSource(context, 1, (const char**)&program_buffer, &program_size, NULL);
+
     cl_int err3 = clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
 
+    //TODO: Choose kernal
     cl_kernel kernel = clCreateKernel(program, "LSB_Encoding", &err);
+
     cl_command_queue queue = clCreateCommandQueueWithProperties(context, device, 0, NULL);
 
     size_t global_size = imageSize;
-    size_t local_size = 64;
+    size_t local_size = width;
 
     cl_mem image_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(int) * imageSize, NULL, &err);
     cl_mem binary_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int) * binarySize, binary, &err);
