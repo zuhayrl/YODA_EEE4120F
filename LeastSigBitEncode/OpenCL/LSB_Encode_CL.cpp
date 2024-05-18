@@ -41,6 +41,8 @@ int main()
     int binary[username.length() * 8];
     convertToBinary(username, binary, binarySize);
 
+    int* image = new int[imageSize];
+
     // OpenCL initialization
     cl_uint platformCount;
     cl_platform_id *platforms;
@@ -108,7 +110,7 @@ int main()
     size_t global_size = imageSize;
     size_t local_size = width;
 
-    cl_mem image_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(int) * imageSize, NULL, &err);
+    cl_mem image_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(int) * imageSize, image, &err);
     cl_mem binary_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int) * binarySize, binary, &err);
 
     clSetKernelArg(kernel, 0, sizeof(cl_mem), &image_buffer);
@@ -119,7 +121,6 @@ int main()
     clEnqueueNDRangeKernel(queue, kernel, 1, NULL, &global_size, &local_size, 0, NULL, NULL);
     clFinish(queue);
 
-    int* image = new int[imageSize];
     clEnqueueReadBuffer(queue, image_buffer, CL_TRUE, 0, sizeof(int) * imageSize, image, 0, NULL, NULL);
 
     ofstream outputFile("encoded_image.ppm");
