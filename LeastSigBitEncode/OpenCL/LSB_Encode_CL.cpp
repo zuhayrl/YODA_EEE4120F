@@ -50,18 +50,17 @@ int main(void)
 
     int width = 64, height = 64;
     int imageSize = width * height;
-    int* image = new int[imageSize];
-    int* imageNon = new int[imageSize]; //for comparison
+    //int* image = new int[imageSize];
+    int image[imageSize];
 
     // Seed the random number generator
-    srand(static_cast<unsigned int>(time(nullptr)));
+    //srand(static_cast<unsigned int>(time(nullptr)));
 
-    int binarySize;
-    int binary[username.length() * 8];
+    int binarySize = username.length()*8;
+    int binary[binarySize];
     convertToBinary(username, binary, binarySize);
 
     int n = imageSize / binarySize;
-
 
 	/* OpenCL structures you need to program*/
 	//cl_device_id device; step 1 and 2
@@ -297,7 +296,7 @@ int main(void)
         }
     }
     outputFile.close();
-    delete[] image;
+    //delete[] image;
 
     cout << "Image encoded successfully. Output file: encoded_image.ppm" << endl;
 
