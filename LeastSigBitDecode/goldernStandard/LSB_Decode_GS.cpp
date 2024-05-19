@@ -54,6 +54,7 @@ int main() {
     int imageSize = width * height;
     vector<int> image(imageSize);
 
+    //Put data from file into array
     for (int i = 0; i < imageSize; i++) {
         inputFile >> image[i];
     }
