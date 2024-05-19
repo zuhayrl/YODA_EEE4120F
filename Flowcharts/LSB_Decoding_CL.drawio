@@ -1,9 +1,108 @@
-<mxfile host="app.diagrams.net" modified="2024-05-19T15:50:20.941Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0" version="24.4.4" etag="aZxSU4zNulALg0uDsQ9s" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-19T15:52:30.385Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0" etag="1iU_uIvkBNU7CGo8ZsWN" version="24.4.4" type="github">
   <diagram name="Page-1" id="M2aru33W83atJXvMy9ki">
-    <mxGraphModel>
+    <mxGraphModel dx="794" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="qohgUq1vid_zthlhwjWv-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-2" target="qohgUq1vid_zthlhwjWv-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-2" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Start&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="30" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-4" target="qohgUq1vid_zthlhwjWv-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-4" value="Get username" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="147" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-6" target="qohgUq1vid_zthlhwjWv-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1081" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-6" value="Display Error&lt;br&gt;Message" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="715" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-9" target="qohgUq1vid_zthlhwjWv-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-9" target="qohgUq1vid_zthlhwjWv-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-9" value="&lt;div&gt;Valid&amp;nbsp;&lt;/div&gt;&lt;div&gt;image file&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="340" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-10" value="End" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="1041" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-11" value="NO" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="356" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-12" value="YES" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="410" y="440" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-14" target="qohgUq1vid_zthlhwjWv-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-14" value="&lt;div&gt;Get Password&amp;nbsp;&lt;/div&gt;&lt;div&gt;Image&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-16" target="qohgUq1vid_zthlhwjWv-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-16" value="&lt;div&gt;Decode image and get binary passkey&lt;/div&gt;&lt;div&gt;(each digit is its own thread)&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="585" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-18" target="qohgUq1vid_zthlhwjWv-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-18" value="compare passkey to username" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="685" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-21" target="qohgUq1vid_zthlhwjWv-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-21" target="qohgUq1vid_zthlhwjWv-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-21" value="&lt;div&gt;Valid &lt;br&gt;&lt;/div&gt;&lt;div&gt;Passkey&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="775" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-23" target="qohgUq1vid_zthlhwjWv-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-23" value="Unlock account" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="905" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="qohgUq1vid_zthlhwjWv-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="596" y="945" as="sourcePoint" />
+            <mxPoint x="560" y="1091" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="596" y="946" />
+              <mxPoint x="560" y="946" />
+              <mxPoint x="560" y="1081" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-25" value="&lt;div&gt;Display &lt;br&gt;&lt;/div&gt;&lt;div&gt;&quot;Invalid Passkey&quot;&lt;br&gt;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="905" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-26" value="NO" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="474" y="785" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-27" value="YES" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="845" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qohgUq1vid_zthlhwjWv-28" target="qohgUq1vid_zthlhwjWv-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qohgUq1vid_zthlhwjWv-28" value="&lt;div&gt;split into n threads where&lt;/div&gt;&lt;div&gt;n= (pixels)/(len(username))&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
