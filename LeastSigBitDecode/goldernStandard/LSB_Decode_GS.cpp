@@ -12,7 +12,7 @@ string convertFromBinary(int* binary, int binarySize) {
     for (int i = 0; i < binarySize; i += 8) {
         int value = 0;
         for (int j = 0; j < 8; ++j) {
-            value = (value << 1) | binary[i + j];
+            printf("Bin %d: %d \n", i+j, binary[i+j]);
         }
         output += static_cast<char>(value);
     }
@@ -52,6 +52,7 @@ int main() {
     int imageSize = width * height;
     int* image = new int[imageSize];
 
+    //read image data from file into array
     for (int i = 0; i < imageSize; i++) {
         inputFile >> image[i];
     }
@@ -61,6 +62,7 @@ int main() {
     int* binary = new int[binarySize];
 
     int n = imageSize / binarySize;
+    //decoding
     decodeImage(image, imageSize, n, binarySize, binary);
 
     string decodedUsername = convertFromBinary(binary, binarySize);

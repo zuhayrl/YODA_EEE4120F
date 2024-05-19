@@ -1,8 +1,10 @@
-__kernel void LSB_Decoding(__global const int* image, __global int* binary, const int imageSize) {
-    int i = get_global_id(0);
-    int j = get_group_id(0);
+__kernel void decodeImage(__global int* image, __global int* binary, const int binSize, const int n) {
+    
+    int binaryIndex = get_global_id(0);
 
-    if (i == (j*64+63)) {
-        binary[j] = image[i] & 1;
+    if (binaryIndex < binSize) {
+        binary[binaryIndex] = image[binaryIndex * n] & 1;
+        //printf("Bin %d: %d \n",binaryIndex , binary[binaryIndex]);
     }
+
 }
