@@ -16,10 +16,10 @@ using namespace std;
 
 // Function to convert binary representation to a string
 string convertFromBinary(int* binary, int binarySize) {
-    string output;
+    string output = "";
     for (int i = 0; i < binarySize; i += 8) {
         int value = 0;
-        for (int j = 0; j < 8; ++j) {
+        for (int j = 0; j < 8; j++) {
             value = (value << 1) | binary[i + j];
         }
         output += static_cast<char>(value);
@@ -70,7 +70,6 @@ int main(void)
     inputFile.close();
 
     int binarySize = username.length() * 8;
-    int* binary = new int[binarySize];
 
     int n = imageSize / binarySize;
 
@@ -229,6 +228,7 @@ int main(void)
 	//TODO: initialize the output array
 	//int output[3*3];
 	//int output[Size*Size]; //square matrix
+	int binary[binarySize];
 
 	//int count_output = Size*Size;
     //int* output = (int*)malloc(sizeof(int) * countA); //output array
