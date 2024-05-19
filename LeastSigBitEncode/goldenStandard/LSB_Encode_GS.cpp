@@ -42,6 +42,7 @@ int main() {
     int width = 64, height = 64;
     int imageSize = width * height;
     int* image = new int[imageSize];
+    int* imageNon = new int[imageSize]; //for comparison
 
     // Seed the random number generator
     srand(static_cast<unsigned int>(time(nullptr)));
@@ -49,6 +50,7 @@ int main() {
     // Initialize image with random pixels
     for (int i = 0; i < imageSize; i++) {
         image[i] = rand() % 256; // Random value between 0 and 255
+        imageNon[i] = image[i]; //for comparison
     }
 
     int binarySize;
@@ -58,7 +60,7 @@ int main() {
     int n = imageSize / binarySize;
     encodeImage(image, binary, binarySize, n, imageSize);
 
-    // Write the encoded image to a PPM file in P3 format
+    // Write the encoded image to a PPM file in P2 format
     ofstream outputFile("encoded_image.ppm");
     outputFile << "P2" << endl << width << " " << height << endl << "255" << endl;
     for (int i = 0; i < imageSize; i++) {
@@ -71,6 +73,21 @@ int main() {
     delete[] image;
 
     cout << "Image encoded successfully. Output file: encoded_image.ppm" << endl;
+
+
+    // Write the encoded image to a PPM file in P2 format ------------ for comparison (added after so timers are easy to do)
+    ofstream outputFile1("plain_image.ppm");
+    outputFile1 << "P2" << endl << width << " " << height << endl << "255" << endl;
+    for (int i = 0; i < imageSize; i++) {
+        outputFile1 << imageNon[i] << " ";
+        if ((i + 1) % width == 0) {
+            outputFile1 << endl;
+        }
+    }
+    outputFile1.close();
+    delete[] imageNon;
+
+    cout << "Image created successfully. Output file: plain_image.ppm" << endl;// ------- for comparison
 
     return 0;
 }
