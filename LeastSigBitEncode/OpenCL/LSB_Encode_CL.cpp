@@ -246,7 +246,7 @@ int main(void)
 	//TODO: create the arguments for the kernel. Note you can create a local buffer only on the GPU as follows: clSetKernelArg(kernel, argNum, size, NULL);
     clSetKernelArg(kernel, 0, sizeof(cl_mem), &image_buffer);
     clSetKernelArg(kernel, 1, sizeof(cl_mem), &binary_buffer);
-    clSetKernelArg(kernel, 3, sizeof(int), (void*)&binarySize); //check later !!!
+    clSetKernelArg(kernel, 2, sizeof(int), (void*)&binarySize); //check later !!!
     clSetKernelArg(kernel, 3, sizeof(int), (void*)&n); //check later !!!
 
 
