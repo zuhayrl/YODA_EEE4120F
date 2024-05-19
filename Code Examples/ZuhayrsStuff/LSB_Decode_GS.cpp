@@ -1,15 +1,17 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
 
 using namespace std;
 
 // Function to convert binary representation to a string
-string convertFromBinary(int* binary, int binarySize) {
+string convertFromBinary(const vector<int>& binary) {
     string output;
-    for (int i = 0; i < binarySize; i += 8) {
+    int size = binary.size();
+    for (int i = 0; i < size; i += 8) {
         int value = 0;
         for (int j = 0; j < 8; ++j) {
             value = (value << 1) | binary[i + j];
@@ -20,9 +22,9 @@ string convertFromBinary(int* binary, int binarySize) {
 }
 
 // Function to decode the binary data from the image using LSB encoding
-void decodeImage(int* image, int imageSize, int n, int binarySize, int* binary) {
+void decodeImage(const vector<int>& image, int n, int binarySize, vector<int>& binary) {
     int binaryIndex = 0;
-    for (int i = 0; i < imageSize; i += n) {
+    for (int i = 0; i < image.size(); i += n) {
         if (binaryIndex >= binarySize) {
             break;
         }
@@ -50,7 +52,7 @@ int main() {
     inputFile >> format >> width >> height >> maxVal;
 
     int imageSize = width * height;
-    int* image = new int[imageSize];
+    vector<int> image(imageSize);
 
     for (int i = 0; i < imageSize; i++) {
         inputFile >> image[i];
@@ -58,12 +60,12 @@ int main() {
     inputFile.close();
 
     int binarySize = username.length() * 8;
-    int* binary = new int[binarySize];
-
+    vector<int> binary(binarySize);
+    
     int n = imageSize / binarySize;
-    decodeImage(image, imageSize, n, binarySize, binary);
+    decodeImage(image, n, binarySize, binary);
 
-    string decodedUsername = convertFromBinary(binary, binarySize);
+    string decodedUsername = convertFromBinary(binary);
 
     cout << "Decoded username from image: " << decodedUsername << endl;
 
@@ -72,9 +74,6 @@ int main() {
     } else {
         cout << "Username does not match the encoded image." << endl;
     }
-
-    delete[] image;
-    delete[] binary;
 
     return 0;
 }
